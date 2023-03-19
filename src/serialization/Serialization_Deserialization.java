@@ -57,15 +57,11 @@ public class Serialization_Deserialization {
 //            System.out.println(user4);
 
             Object obj = null;
-            try {
-                while ((obj = input.readObject()) != null) {
-                    System.out.println(obj);
-                }
-            } catch (EOFException e) {
-                System.out.println("End of file reached.");
-            } finally {
-                input.close();
+            while (fis.available() > 0) {
+                obj = input.readObject();
+                System.out.println(obj);
             }
+            input.close();
 
 
         } catch (FileNotFoundException e) {
