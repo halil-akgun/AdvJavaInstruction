@@ -40,22 +40,33 @@ public class Serialization_Deserialization {
 
     //objectleri dosyadan okuma:de-serialization
     public static void readObjects() {
-
         try {
             //okuyacağımız dosyayı belirtelim
             FileInputStream fis = new FileInputStream("user.txt");
             //objectleri okumak için
             ObjectInputStream input = new ObjectInputStream(fis);
 
-            User user1 = (User) input.readObject();
-            User user2 = (User) input.readObject();
-            User user3 = (User) input.readObject();
-            User user4 = (User) input.readObject();
+//            User user1 = (User) input.readObject();
+//            User user2 = (User) input.readObject();
+//            User user3 = (User) input.readObject();
+//            User user4 = (User) input.readObject();
+//
+//            System.out.println(user1);
+//            System.out.println(user2);
+//            System.out.println(user3);
+//            System.out.println(user4);
 
-            System.out.println(user1);
-            System.out.println(user2);
-            System.out.println(user3);
-            System.out.println(user4);
+            Object obj = null;
+            try {
+                while ((obj = input.readObject()) != null) {
+                    System.out.println(obj);
+                }
+            } catch (EOFException e) {
+                System.out.println("End of file reached.");
+            } finally {
+                input.close();
+            }
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
